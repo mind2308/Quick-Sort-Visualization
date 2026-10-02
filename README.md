@@ -1,6 +1,7 @@
 # Quick Sort Visualizer (C++ / WebAssembly)
 
-:- Live demo: https://mind2308.github.io/Quick-Sort-Visualization/
+:- Live demo: https://mind2308.github.io/Quick-Sort-Visualization/ 
+
 :- Source code: https://github.com/mind2308/Quick-Sort-Visualization
 
 An interactive, browser-based Quick Sort demonstration. The sorting algorithm is written in C++, compiled to WebAssembly with Emscripten, and displayed using HTML, CSS, and JavaScript.
