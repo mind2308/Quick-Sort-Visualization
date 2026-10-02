@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An interactive Quick Sort visualizer powered by C++ and WebAssembly.">
+  <title>Quick Sort Visualizer | C++</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="quicksort.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      
+      <h1>Quick Sort <span>Visualizer</span></h1>
+      <p>See how the pivot partitions an array, one step at a time.</p>
+      <div class="tech-tags"><span>C++</span><span>WebAssembly</span></div>
+    </header>
+
+    <section class="panel controls">
+      <label for="numbers">Enter numbers <span>(comma-separated)</span></label>
+      <div class="input-row">
+        <input id="numbers" type="text" value="35, 12, 48, 7, 23, 16, 40" autocomplete="off" spellcheck="false">
+        <button id="runBtn" class="primary">Visualize</button>
+      </div>
+      <div class="examples">
+        <span>Try:</span>
+        <button class="example" data-values="35, 12, 48, 7, 23, 16, 40">Mixed</button>
+        <button class="example" data-values="5, 1, 5, -2, 9, 1">Duplicates</button>
+        <button class="example" data-values="1, 2, 3, 4, 5">Already sorted</button>
+      </div>
+      <p id="error" class="error" role="alert"></p>
+    </section>
+
+    <section class="panel visualization">
+      <div class="section-heading">
+        <div><span class="section-kicker">CURRENT ARRAY</span><h2>Partition in progress</h2></div>
+        <div id="stepCounter" class="step-counter">Step 1 / 1</div>
+      </div>
+      <div id="arrayView" class="array-view" aria-label="Array visualization"></div>
+      <div class="legend">
+        <span><i class="legend-box pivot"></i> Pivot</span>
+        <span><i class="legend-box active"></i> Current item</span>
+        <span><i class="legend-box sorted"></i> Pivot in final position</span>
+      </div>
+      <div class="step-message">
+        <div class="message-icon">↳</div>
+        <div><div id="stepType" class="section-kicker">START</div><p id="message">Loading the C++ module…</p></div>
+      </div>
+      <div class="progress-track"><div id="progress" class="progress-fill"></div></div>
+      <div class="playback">
+        <button id="resetBtn" class="secondary" title="Go to first step">↺ Reset</button>
+        <div class="playback-center">
+          <button id="prevBtn" class="secondary" title="Previous step">← Previous</button>
+          <button id="playBtn" class="primary">▶ Auto Play</button>
+          <button id="nextBtn" class="secondary" title="Next step">Next →</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel code-panel">
+      <div class="section-heading">
+        <div><span class="section-kicker">C++ SOURCE CODE</span><h2>What is running right now?</h2></div>
+        <span class="code-language">quicksort.cpp</span>
+      </div>
+      <p class="code-intro">Step through the algorithm above to see the related C++ statement highlighted below.</p>
+      <div id="codeView" class="code-view" aria-label="Highlighted C++ source code"></div>
+      <p id="codeExplanation" class="code-explanation">The highlighted line follows the current visualizer step.</p>
+    </section>
+
+    <section class="stats-grid">
+      <article class="panel stat"><span class="section-kicker">PIVOT</span><strong id="pivotStat">—</strong><small>Current partition pivot</small></article>
+      <article class="panel stat"><span class="section-kicker">COMPARISONS</span><strong id="comparisonsStat">0</strong><small>Values compared with pivot</small></article>
+      <article class="panel stat"><span class="section-kicker">SWAPS</span><strong id="swapsStat">0</strong><small>Array element swaps</small></article>
+    </section>
+
+    <section class="panel explanation">
+      <div class="section-kicker">HOW IT WORKS</div>
+      <h2>Divide, partition, repeat.</h2>
+      <div class="principles">
+        <div><b>01</b><h3>Choose a pivot</h3><p>This implementation chooses the last item in the current range.</p></div>
+        <div><b>02</b><h3>Partition</h3><p>Move values less than or equal to the pivot to its left.</p></div>
+        <div><b>03</b><h3>Recurse</h3><p>Apply Quick Sort to the ranges on either side of the pivot.</p></div>
+      </div>
+      <div class="complexity">
+        <div><span>Average time</span><strong>O(n log n)</strong></div>
+        <div><span>Worst-case time</span><strong>O(n²)</strong></div>
+        <div><span>Auxiliary space</span><strong>O(log n) average</strong></div>
+      </div>
+      <p class="footnote">Complexity note: worst-case auxiliary space can be O(n) due to recursion. This visualizer uses the Lomuto partition scheme.</p>
+    </section>
+    <footer>Built with C++ · Compiled to WebAssembly</footer>
+  </main>
+</body>
+</html>
